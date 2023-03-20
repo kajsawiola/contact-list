@@ -102,19 +102,19 @@
 
         private static void loadFile(string lastFileName)
         {
-            using (StreamReader infile = new StreamReader(lastFileName))
+            using (StreamReader textfilen = new StreamReader(lastFileName))
             {
                 string line;
-                while ((line = infile.ReadLine()) != null)
+                while ((line = textfilen.ReadLine()) != null)
                 {
                     Console.WriteLine(line);
-                    string[] attrs = line.Split('|');
+                    string[] attribut = line.Split('|');
                     Person p = new Person();
-                    p.persname = attrs[0];
-                    p.surname = attrs[1];
-                    string[] phones = attrs[2].Split(';');
+                    p.persname = attribut[0];
+                    p.surname = attribut[1];
+                    string[] phones = attribut[2].Split(';');
                     p.phone = phones[0];
-                    string[] addresses = attrs[3].Split(';');
+                    string[] addresses = attribut[3].Split(';');
                     p.address = addresses[0];
                     for (int ix = 0; ix < contactList.Length; ix++)
                     {
