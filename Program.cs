@@ -37,14 +37,7 @@
                 {
                     if (commandLine.Length < 2)
                     {
-                        using (StreamWriter outfile = new StreamWriter(lastFileName))
-                        {
-                            foreach (Person p in contactList)
-                            {
-                                if (p != null)
-                                    outfile.WriteLine($"{p.persname};{p.surname};{p.phone};{p.address};{p.birthdate}");
-                            }
-                        }
+                        save(lastFileName);
                     }
                     else
                     {
@@ -55,14 +48,7 @@
                 else if (commandLine[0] == "new") //lägger till en ny person till atributen namn, efternamn och telefon
                 {
                     if (commandLine.Length < 2)
-                    {
-                        Console.Write("personal name: ");
-                        string persname = Console.ReadLine();
-                        Console.Write("surname: ");
-                        string surname = Console.ReadLine();
-                        Console.Write("phone: ");
-                        string phone = Console.ReadLine();
-                    }
+                        nyPerson();
                     else
                     {
                         // NYI!
@@ -88,6 +74,28 @@
                     Console.WriteLine($"Unknown command: '{commandLine[0]}'");
                 }
             } while (commandLine[0] != "quit"); //avslutar programmet
+        }
+
+        private static void nyPerson()
+        {
+            Console.Write("personal name: ");
+            string persname = Console.ReadLine();
+            Console.Write("surname: ");
+            string surname = Console.ReadLine();
+            Console.Write("phone: ");
+            string phone = Console.ReadLine();
+        }
+
+        private static void save(string lastFileName)
+        {
+            using (StreamWriter outfile = new StreamWriter(lastFileName))
+            {
+                foreach (Person p in contactList)
+                {
+                    if (p != null)
+                        outfile.WriteLine($"{p.persname};{p.surname};{p.phone};{p.address};{p.birthdate}");
+                }
+            }
         }
 
         private static void quit()
