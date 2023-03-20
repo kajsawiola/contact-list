@@ -7,6 +7,11 @@
         {
             public string persname, surname, phone, address, birthdate;
         }
+        public string Phone
+        { get; set; }
+        public string Address 
+        { get; set; }
+
         public static void Main(string[] args)
         {
             string lastFileName = "address.lis";
@@ -22,48 +27,71 @@
                 }
                 else if (commandLine[0] == "load") //laddar texten i filen "adress.txt" i rader i en array.
                 {
-                    if (commandLine.Length < 2)
-                    {
-                        lastFileName = "address.txt";
-                        loadFile(lastFileName);
-                    }
-                    else //laddar texten i angiven fil in i rader i en array
-                    {
-                        lastFileName = commandLine[1];
-                        loadFile(lastFileName);
-                    }
+                    lastFileName = loadFunkiton(commandLine);
                 }
                 else if (commandLine[0] == "save")  //sparar ett angivet objekt i "contactlist []"
                 {
-                    if (commandLine.Length < 2)
-                    {
-                        save(lastFileName);
-                    }
-                    else
-                    {
-                        // NYI!
-                        Console.WriteLine("Not yet implemented: save /file/");
-                    }
+                    saveFunktion(lastFileName, commandLine);
                 }
                 else if (commandLine[0] == "new") //lägger till en ny person till atributen namn, efternamn och telefon
                 {
-                    if (commandLine.Length < 2)
-                        nyPerson();
-                    else
-                    {
-                        // NYI!
-                        Console.WriteLine("Not yet implemented: new /person/");
-                    }
+                    nyPersonFunktion(commandLine);
                 }
-                else if (commandLine[0] == "help") //visar alla funktioner i programmet
-                {
-                    listaFunktioner();
-                }
-                else
-                {
-                    Console.WriteLine($"Unknown command: '{commandLine[0]}'");
-                }
+                else helpFunktion(commandLine);
             } while (commandLine[0] != "quit"); //avslutar programmet
+        }
+
+        private static void helpFunktion(string[] commandLine)
+        {
+            if (commandLine[0] == "help") //visar alla funktioner i programmet
+            {
+                listaFunktioner();
+            }
+            else
+            {
+                Console.WriteLine($"Unknown command: '{commandLine[0]}'");
+            }
+        }
+
+        private static void nyPersonFunktion(string[] commandLine)
+        {
+            if (commandLine.Length < 2)
+                nyPerson();
+            else
+            {
+                // NYI!
+                Console.WriteLine("Not yet implemented: new /person/");
+            }
+        }
+
+        private static void saveFunktion(string lastFileName, string[] commandLine)
+        {
+            if (commandLine.Length < 2)
+            {
+                save(lastFileName);
+            }
+            else
+            {
+                // NYI!
+                Console.WriteLine("Not yet implemented: save /file/");
+            }
+        }
+
+        private static string loadFunkiton(string[] commandLine)
+        {
+            string lastFileName;
+            if (commandLine.Length < 2)
+            {
+                lastFileName = "address.txt";
+                loadFile(lastFileName);
+            }
+            else //laddar texten i angiven fil in i rader i en array
+            {
+                lastFileName = commandLine[1];
+                loadFile(lastFileName);
+            }
+
+            return lastFileName;
         }
 
         private static void listaFunktioner()
