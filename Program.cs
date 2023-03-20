@@ -18,8 +18,7 @@
                 commandLine = Console.ReadLine().Split(' ');
                 if (commandLine[0] == "quit") //Avslutar programmet
                 {
-                    // NYI!
-                    Console.WriteLine("Not yet implemented: safe quit");
+                    quit();
                 }
                 else if (commandLine[0] == "load") //laddar texten i filen "adress.txt" i rader i en array.
                 {
@@ -89,6 +88,12 @@
                     Console.WriteLine($"Unknown command: '{commandLine[0]}'");
                 }
             } while (commandLine[0] != "quit"); //avslutar programmet
+        }
+
+        private static void quit()
+        {
+            // NYI!
+            Console.WriteLine("Not yet implemented: safe quit");
         }
 
         private static void välkommstInfo()
