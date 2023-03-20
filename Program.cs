@@ -25,48 +25,25 @@
             {
                 Console.Write($"> ");
                 commandLine = Console.ReadLine().Split(' ');
-                if (commandLine[0] == "quit")
+                if (commandLine[0] == "quit") //Avslutar programmet
                 {
                     // NYI!
                     Console.WriteLine("Not yet implemented: safe quit");
                 }
-                else if (commandLine[0] == "load")
+                else if (commandLine[0] == "load") //laddar texten i filen "adress.txt" i rader i en array.
                 {
                     if (commandLine.Length < 2)
                     {
-                        lastFileName = "address.lis";
+                        lastFileName = "address.txt";
                         loadFile(lastFileName);
                     }
-                    else
+                    else //laddar texten i angiven fil in i rader i en array
                     {
                         lastFileName = commandLine[1];
-                        using (StreamReader infile = new StreamReader(lastFileName))
-                        {
-                            string line;
-                            while ((line = infile.ReadLine()) != null)
-                            {
-                                Console.WriteLine(line);
-                                string[] attrs = line.Split('|');
-                                Person p = new Person();
-                                p.persname = attrs[0];
-                                p.surname = attrs[1];
-                                string[] phones = attrs[2].Split(';');
-                                p.phone = phones[0];
-                                string[] addresses = attrs[3].Split(';');
-                                p.address = addresses[0];
-                                for (int ix = 0; ix < contactList.Length; ix++)
-                                {
-                                    if (contactList[ix] == null)
-                                    {
-                                        contactList[ix] = p;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
+                        loadFile(lastFileName);                        
                     }
                 }
-                else if (commandLine[0] == "save")
+                else if (commandLine[0] == "save")  //sparar ett angivet objekt i "contactlist []"
                 {
                     if (commandLine.Length < 2)
                     {
@@ -85,7 +62,7 @@
                         Console.WriteLine("Not yet implemented: save /file/");
                     }
                 }
-                else if (commandLine[0] == "new")
+                else if (commandLine[0] == "new") //lägger till en ny person till atributen namn, efternamn och telefon
                 {
                     if (commandLine.Length < 2)
                     {
@@ -102,7 +79,7 @@
                         Console.WriteLine("Not yet implemented: new /person/");
                     }
                 }
-                else if (commandLine[0] == "help")
+                else if (commandLine[0] == "help") //visar alla funktioner i programmet
                 {
                     Console.WriteLine("Avaliable commands: ");
                     Console.WriteLine("  delete       - emtpy the contact list");
@@ -120,7 +97,7 @@
                 {
                     Console.WriteLine($"Unknown command: '{commandLine[0]}'");
                 }
-            } while (commandLine[0] != "quit");
+            } while (commandLine[0] != "quit"); //avslutar programmet
         }
 
         private static void loadFile(string lastFileName)
